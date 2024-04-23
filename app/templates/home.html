@@ -2,13 +2,14 @@
     <head>
         {% block more_css %}
             <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+
         {% endblock %}
     </head>
 
     <body>
         <nav class="menu">
             <ul>
-                <li><a href="{{ url_for('home') }}">UofR Connect</a></li>
+                <li><a href="{{ url_for('home') }}">UR New Friends</a></li>
                 <li><a href="{{ url_for('login') }}">Login</a></li>
                 <li><a href="{{ url_for('register') }}">Register</a></li>
             </ul>

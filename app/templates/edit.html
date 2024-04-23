@@ -1,15 +1,16 @@
 {% block more_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">        
 {% endblock %}
 
 <nav class="menu">
     <ul>
         <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        <li><a href="{{ url_for('finder') }}">Classmate Finder</a></li>
+        <li><a href="{{ url_for('finder') }}">Finder</a></li>
     </ul>
 </nav>
 
-<p>Edit the information on your profile </p>
+<p>Edit the Information on Your Profile </p>
 
 <form action="" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
@@ -34,3 +35,4 @@
     </p>
     <p>{{ form.submit() }}</p>
 </form>
+

@@ -134,7 +134,7 @@ def generalProfile(uid):
         db.session.add(comment)
         db.session.commit()
         return redirect('/users/' + str(uid))
-    return render_template('generalProfile.html', user=user, form=form)
+    return render_template('profile.html', user=user, form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

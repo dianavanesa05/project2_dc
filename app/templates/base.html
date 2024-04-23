@@ -1,20 +1,20 @@
 <div>
 
-        {% if current_user.is_anonymous %}
-        <nav class="menu">
-                <ul>
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                </ul>
-        </nav>
-        {% else %}
-        <nav class="menu">
-                <ul>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                    <li><a href="{{ url_for('finder') }}">Classmate Finder</a></li>
-                </ul>
-        </nav>
-        {% endif %}
+    {% if current_user.is_anonymous %}
+    <nav class="menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
+    </nav>
+    {% else %}
+    <nav class="menu">
+            <ul>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('finder') }}">Classmate Finder</a></li>
+            </ul>
+    </nav>
+    {% endif %}
 </div>
 
 {% block content %}

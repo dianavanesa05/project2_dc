@@ -3,7 +3,8 @@
 {% block content %}
 
     {% block more_css %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">        
     {% endblock %}
 
     <h1>Hi, {{ current_user.username }}! This is your dashboard</h1>
@@ -13,13 +14,14 @@
         <a href="{{ pic_link }}">Click here to see your profile pic</a>    
     </div>
 
-    <h2>Your name is {{ current_user.fName }} {{current_user.lName}}</h2>
-    <h2>Your class year is {{ current_user.year }}</h2>
-    <h2>Your Major is {{ current_user.major }} </h2>
-    <h2>Your email is {{ current_user.email }}</h2>
+    <h2>Your Name is: {{ current_user.fName }} {{current_user.lName}}</h2>
+    <h2>Your Class Year is: {{ current_user.year }}</h2>
+    <h2>Your Major is: {{ current_user.major }} </h2>
+    <h2>Your Email is: {{ current_user.email }}</h2>
+
 
     <div>
-        <h3>Here are the comments on your profile</h3><br>
+        <h3>Here are the comments on your profile:</h3><br>
         {% for comment in current_user.comments %}
             {% set cid = comment.id | string() %}
             {% set link = "/delete/" ~ cid %}
