@@ -1,51 +1,53 @@
-{% extends "base.html" %}
+<html>
+    <head>
+        {% block more_css %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+        {% endblock %}
+    </head>
 
-{% block content %}
-<nav class="menu">
-    <ul>
-        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        <li><a href="{{ url_for('index') }}">Profile</a></li>
-        <li><a href="{{ url_for('finder') }}">Finder</a></li>
-    </ul>
-</nav>
+    <body>
 
-<div class="container">
-    <h1>Welcome to {{ user.username }}'s profile</h1>
-    <h2>Their name is {{ user.fName }} {{ user.lName }}</h2>
-    <h2>Their class year is {{ user.year }}</h2>
-    <h2>Their major is {{ user.major }}</h2>
-    <h2>Their email is {{ user.email }}</h2>
+        <nav class="menu">
+            <ul>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('index') }}">Profile</a></li>
+                <li><a href="{{ url_for('finder') }}">Classmate Finder</a></li>
+            </ul>
+        </nav>
 
-    <div class="button">
-        {% set uid = user.id | string() %}
-        {% set pic_link = "/otherPic/" ~ uid %}
-        <a href="{{ pic_link }}">Click here to see their profile pic</a>
-    </div>
+        <h1>Welcome to {{ user.username }}'s profile</h1>
+        <h2>Their name is {{ user.fName }} {{ user.lName }}</h2>
+        <h2>Their class year is {{ user.year }} </h2>
+        <h2>Their major is {{ user.major }}</h2>
+        <h2>Their email is {{ user.email }}</h2>
 
-    <div>
-        <h3>Here are the comments on their profile</h3>
-        <ul class="comments-list">
+        <div class="button">
+            {% set uid = user.id | string() %}
+            {% set pic_link = "/otherPic/" ~ uid %}
+            <a href="{{ pic_link }}">Click here to see their profile pic</a>    
+        </div>
+
+        <div>
+            <h3>Here are the comments on their profile</h3><br>
             {% for comment in user.comments %}
-                <li>
-                    {% if comment.username == current_user.username %}
-                        {% set cid = comment.id | string() %}
-                        {% set link = "/deleteOther/" ~ cid ~ "/" ~ user.id %}
-                        {{ comment.username }}: {{ comment.comments }} <a href="{{ link }}">delete comment</a>
-                    {% else %}
-                        {{ comment.username }}: {{ comment.comments }}
-                    {% endif %}
-                </li>
+                {% if comment.username == current_user.username%}
+                    {% set cid = comment.id | string() %}
+                    {% set link = "/deleteOther/" ~ cid ~ "/" ~ user.id %}
+                    <p> {{ comment.username }}: {{ comment.comments }}</p> <p> <a href="{{ link }}">delete comment</a></p><br>
+                {% else %}
+                    <p> {{ comment.username }}: {{ comment.comments }}</p><br>
+                {% endif %}
             {% endfor %}
-        </ul>
-    </div>
+        </div>
+    
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.comments.label }}<br>
+                {{ form.comments(size=32) }}<br>
+            </p>
+            <p> {{ form.submit() }} </p>
+        </form>
 
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.comments.label }}<br>
-            {{ form.comments(size=32) }}<br>
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
-</div>
-{% endblock %}
+    </body>
+</html>

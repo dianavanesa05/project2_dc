@@ -1,74 +1,64 @@
-{% extends "base.html" %}
+<html>
+    <head>
+        {% block more_css %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+        {% endblock %}
+    </head>
 
-{% block content %}
-<nav class="menu">
-    <ul>
-        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        <li><a href="{{ url_for('index') }}">Profile</a></li>
-    </ul>
-</nav>
+    <body>
 
-<div class="container">
-    <h1>Find other users here</h1>
+        <nav class="menu">
+            <ul>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('index') }}">Profile</a></li>
+            </ul>
+        </nav>
 
-    <h2>Find users by your major and class year: {{ current_user.major}} majors in class year {{ current_user.year }}</h2>
-    <ul class="user-list">
+        <h1>Find other users here</h1>
+
+        <h2>Find users by your major and class year: {{ current_user.major}} majors in class year {{ current_user.year }}</h2>
         {% if has_major_class %}
             {% for user in usersMajorAndClass %}
-                <li>
-                    <a href="{{ url_for('user_profile', user_id=user.id) }}">
-                        {{ user.username }}: {{ user.fName }} {{ user.lName }}
-                    </a>
-                </li>
+                {% set uid = user.id | string() %}
+                {% set link = "/users/" ~ uid %}
+                    <p> <a href="{{ link }}">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
             {% endfor %}
         {% else %}
-            <li>There are no users that fit this category</li>
+            <p>There are no users that fit this category</p>
         {% endif %}
-    </ul>
+        
+        <h2>Find users by your class year: {{ current_user.year }}</h2>
+            {% if has_class %}
+                {% for user in userClass %}
+                    {% set uid = user.id | string() %}
+                    {% set link = "/users/" ~ uid %}
+                        <p> <a href="{{ link }}">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
+                {% endfor %}
+            {% else %}
+                <p>There are no users that fit this category</p>
+            {% endif %}
 
-    <h2>Find users by your class year: {{ current_user.year }}</h2>
-    <ul class="user-list">
-        {% if has_class %}
-            {% for user in userClass %}
-                <li>
-                    <a href="{{ url_for('user_profile', user_id=user.id) }}">
-                        {{ user.username }}: {{ user.fName }} {{ user.lName }}
-                    </a>
-                </li>
-            {% endfor %}
-        {% else %}
-            <li>There are no users that fit this category</li>
-        {% endif %}
-    </ul>
+        <h2>Find users by your major: {{ current_user.major }}</h2>
+            {% if has_major %}
+                {% for user in userMajor %}
+                        {% set uid = user.id | string() %}
+                        {% set link = "/users/" ~ uid %}
+                            <p> <a href="{{ link }}">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
+                {% endfor %}
+            {% else %}
+                <p>There are no users that fit this category</p>
+            {% endif %}
 
-    <h2>Find users by your major: {{ current_user.major }}</h2>
-    <ul class="user-list">
-        {% if has_major %}
-            {% for user in userMajor %}
-                <li>
-                    <a href="{{ url_for('user_profile', user_id=user.id) }}">
-                        {{ user.username }}: {{ user.fName }} {{ user.lName }}
-                    </a>
-                </li>
-            {% endfor %}
-        {% else %}
-            <li>There are no users that fit this category</li>
-        {% endif %}
-    </ul>
+        <h2>All users</h2>
+            {% if has_users %}
+                {% for user in users %}
+                    {% set uid = user.id | string() %}
+                    {% set link = "/users/" ~ uid %}
+                        <p> <a href="{{ link }}">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
+                {% endfor %}
+            {% else %}
+                <p>There are no users that fit this category</p>
+            {% endif %}
 
-    <h2>All users</h2>
-    <ul class="user-list">
-        {% if has_users %}
-            {% for user in users %}
-                <li>
-                    <a href="{{ url_for('user_profile', user_id=user.id) }}">
-                        {{ user.username }}: {{ user.fName }} {{ user.lName }}
-                    </a>
-                </li>
-            {% endfor %}
-        {% else %}
-            <li>There are no users that fit this category</li>
-        {% endif %}
-    </ul>
-</div>
-{% endblock %}
+    </body>
+</html>

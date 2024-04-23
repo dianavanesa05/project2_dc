@@ -1,17 +1,22 @@
-{% block more_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
-{% endblock %}
+<html>
+    <head>
+        {% block more_css %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+        {% endblock %}
+    </head>
 
-<nav class="menu">
-    <ul>
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('register') }}">Register</a></li>
-    </ul>
-</nav>
+    <body>
+        <nav class="menu">
+            <ul>
+                <li><a href="{{ url_for('home') }}">UofR Connect</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+            </ul>
+        </nav>
 
-<div class="container">
-    <h2>UofR Real Connected</h2>
-    <img src="https://cdn.britannica.com/w:400,h:300,c:crop/94/116994-004-EB472E55/Rush-Rhees-Library-University-of-Rochester-New.jpg" alt="UofR Real Connected Image">
-    <p>Are you a returning user? <a href="{{ url_for('login') }}">Login</a></p>
-    <p>Are you a new user? <a href="{{ url_for('register') }}">Register here</a></p>
-</div>
+        <h2>UofR Real Connected</h2>
+        <img src="https://cdn.britannica.com/w:400,h:300,c:crop/94/116994-004-EB472E55/Rush-Rhees-Library-University-of-Rochester-New.jpg">
+        <p>Are you a returning user? <a href="{{ url_for('login') }}">Login</a></p>
+        <p>Are you a new user? <a href="{{ url_for('register') }}">Register here</a></p>
+    </body>
+</html>

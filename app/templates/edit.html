@@ -1,41 +1,36 @@
-{% extends "base.html" %}
 {% block more_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
 {% endblock %}
-{% block content %}
+
 <nav class="menu">
     <ul>
         <li><a href="{{ url_for('logout') }}">Logout</a></li>
         <li><a href="{{ url_for('finder') }}">Classmate Finder</a></li>
     </ul>
 </nav>
-<div class="container">
-    <h2>Edit Profile</h2>
-    <form action="" method="post" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        {{ form.csrf_token }}
-        <div class="form-group">
-            <input type="file" name="pic"/>
-        </div>
-        <div class="form-group">
-            {{ form.fName.label }}<br>
-            {{ form.fName(size=32) }}
-        </div>
-        <div class="form-group">
-            {{ form.lName.label }}<br>
-            {{ form.lName(size=32) }}
-        </div>
-        <div class="form-group">
-            {{ form.year.label }}<br>
-            {{ form.year(size=32) }}
-        </div>
-        <div class="form-group">
-            {{ form.major.label }}<br>
-            {{ form.major(size=32) }}
-        </div>
-        <div class="form-group">
-            {{ form.submit() }}
-        </div>
-    </form>
-</div>
-{% endblock %}
+
+<p>Edit the information on your profile </p>
+
+<form action="" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+
+    <input type="file" name="pic"/>
+    <p>
+        {{ form.fName.label }}<br>
+        {{ form.fName(size=32) }}<br>
+    </p>
+    <p>
+        {{ form.lName.label }}<br>
+        {{ form.lName(size=32) }}<br>
+    </p>
+    <p>
+        {{ form.year.label }}<br>
+        {{ form.year(size=32) }}<br>
+    </p>
+    <p>
+        {{ form.major.label }}<br>
+        {{ form.major(size=32) }}<br>
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
