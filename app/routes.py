@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request, Flask
 from flask.wrappers import Response
 from flask_login import login_user, logout_user, current_user, login_required
-from werkzeug.urls import url_parse  # Change this import
+from werkzeug import urls
 from werkzeug.utils import secure_filename
 from app import app, db
 from app.forms import CommentsForm, LoginForm, ProfileForm, RegistrationForm, CommentsOtherProfileForm
@@ -9,7 +9,6 @@ from app.models import Comments, User, Img
 import os
 import uuid
 from datetime import datetime
-
 
 @app.route('/')
 @app.route('/home')

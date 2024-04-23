@@ -1,22 +1,31 @@
-<div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% block more_css %}
+    {% endblock %}
+</head>
+<body>
+    <div>
         {% if current_user.is_anonymous %}
         <nav class="menu">
-                <ul>
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                </ul>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            </ul>
         </nav>
         {% else %}
         <nav class="menu">
-                <ul>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                    <li><a href="{{ url_for('finder') }}">Finder</a></li>
-                </ul>
+            <ul>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                <li><a href="{{ url_for('finder') }}">Classmate Finder</a></li>
+            </ul>
         </nav>
         {% endif %}
-</div>
-
-{% block content %}
-
-{% endblock %}
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
