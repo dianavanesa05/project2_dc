@@ -2,16 +2,22 @@ from flask import render_template, flash, redirect, url_for, request, Flask
 from flask.wrappers import Response
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug import urls
+from werkzeug.urls import url_parse  
 from werkzeug.utils import secure_filename
 from app import app, db
 from app.forms import CommentsForm, LoginForm, ProfileForm, RegistrationForm, CommentsOtherProfileForm
 from app.models import Comments, User, Img
+import os
+import uuid
+from datetime import datetime
+
 
 @app.route('/')
 @app.route('/home')
 def home():
     logout_user()
     return render_template('home.html')
+
 
 @app.route('/edit', methods=['GET', 'POST'])
 @login_required
@@ -24,22 +30,29 @@ def edit():
         user.year = form.year.data
         user.major = form.major.data
         pic = request.files['pic']
-        filename = secure_filename(pic.filename)
+        
+        # Generate a unique filename
+        filename = f"{datetime.now().strftime('%Y%m%d%H%M%S')}-{uuid.uuid4().hex[:8]}_{secure_filename(pic.filename)}"
         mimetype = pic.mimetype
         img = Img(img=pic.read(), mimetype=mimetype, name=filename, username=current_user.username)
-        if(Img.query.filter_by(username=current_user.username).first() is None):
-            db.session.add(img)
-        else:
-            Img.query.filter_by(username=current_user.username).delete()
-            db.session.add(img)
+        
+        # Check if the user already has an image, delete it if exists
+        existing_img = Img.query.filter_by(username=current_user.username).first()
+        if existing_img:
+            db.session.delete(existing_img)
+
+        db.session.add(img)
         db.session.commit()
         return redirect('/index')
-    if(current_user.fName != None ):
+
+    if current_user.fName is not None:
         form.fName.data = current_user.fName
         form.lName.data = current_user.lName
         form.year.data = current_user.year 
         form.major.data = current_user.major
+
     return render_template('edit.html', form=form)
+
 
 @app.route('/pic')
 def get_img():
