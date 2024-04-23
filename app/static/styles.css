@@ -1,9 +1,9 @@
-body{
+body {
     background-color: rgb(219, 182, 114);
     text-align: center;
 }
 
-.menu ul{
+.menu ul {
     list-style-type: none;
     margin: 0;
     padding-left: 0;
@@ -12,12 +12,33 @@ body{
     background-color: black;
     margin-top: 10px;
 }
-.menu a{
+
+.menu a {
     display: block;
     padding: 25px 10px;
     text-decoration: none;
     color: white;
 }
-.menu a:hover{
+
+.menu a:hover {
     background-color: rgba(0, 0, 0, 0.356);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.button {
+    margin-top: 20px;
+}
+
+.comments-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comments-list li {
+    margin-bottom: 10px;
 }

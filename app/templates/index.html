@@ -1,30 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
+<nav class="menu">
+    <ul>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        <li><a href="{{ url_for('index') }}">Profile</a></li>
+        <li><a href="{{ url_for('finder') }}">Classmate Finder</a></li>
+    </ul>
+</nav>
 
-    {% block more_css %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
-    {% endblock %}
-
+<div class="container">
     <h1>Hi, {{ current_user.username }}! This is your dashboard</h1>
 
     <div class="button">
         {% set pic_link = "/pic" %}
-        <a href="{{ pic_link }}">Click here to see your profile pic</a>    
+        <a href="{{ pic_link }}">Click here to see your profile pic</a>
     </div>
 
-    <h2>Your name is {{ current_user.fName }} {{current_user.lName}}</h2>
+    <h2>Your name is {{ current_user.fName }} {{ current_user.lName }}</h2>
     <h2>Your class year is {{ current_user.year }}</h2>
-    <h2>Your Major is {{ current_user.major }} </h2>
+    <h2>Your Major is {{ current_user.major }}</h2>
     <h2>Your email is {{ current_user.email }}</h2>
 
     <div>
-        <h3>Here are the comments on your profile</h3><br>
-        {% for comment in current_user.comments %}
-            {% set cid = comment.id | string() %}
-            {% set link = "/delete/" ~ cid %}
-            <p> {{ comment.username }}: {{ comment.comments }}</p> <p> <a href="{{ link }}">delete comment</a></p><br>
-        {% endfor %}
+        <h3>Here are the comments on your profile</h3>
+        <ul class="comments-list">
+            {% for comment in current_user.comments %}
+                <li>
+                    {% set cid = comment.id | string() %}
+                    {% set link = "/delete/" ~ cid %}
+                    {{ comment.username }}: {{ comment.comments }} <a href="{{ link }}">delete comment</a>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 
     <form action="" method="post">
@@ -33,12 +41,12 @@
             {{ form.comments.label }}<br>
             {{ form.comments(size=32) }}<br>
         </p>
-        <p> {{ form.submit() }} </p>
+        <p>{{ form.submit() }}</p>
     </form>
 
     <div class="button">
         {% set edit_link = "/edit" %}
         <a href="{{ edit_link }}">Update profile</a>
     </div>
-
+</div>
 {% endblock %}
