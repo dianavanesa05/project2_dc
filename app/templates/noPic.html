@@ -1,0 +1,18 @@
+<html>
+    <head>
+        {% block more_css %}
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+        {% endblock %}
+    </head>
+
+    <body>
+
+        <h1>No image to be found</h1>
+
+        <div class="button">
+            {% set profile_link = "/index" %}
+            <a href="{{ profile_link }}">Go back</a>
+        </div>
+
+    </body>
+</html>

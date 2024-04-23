@@ -1,0 +1,23 @@
+body{
+    background-color: aqua;
+    text-align: center;
+}
+
+.menu ul{
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: black;
+    margin-top: 10px;
+}
+.menu a{
+    display: block;
+    padding: 25px 10px;
+    text-decoration: none;
+    color: white;
+}
+.menu a:hover{
+    background-color: rgba(0, 0, 0, 0.356);
+}

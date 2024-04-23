@@ -1,0 +1,38 @@
+{% block more_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+{% endblock %}
+
+<nav class="menu">
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+    </ul>
+</nav>
+
+<p>Is this your first time with us? <a href="{{ url_for('register') }}">Register here</a></p>
+
+<form action="" method="post">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <span style="color: red;">[{{ message }}]</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
