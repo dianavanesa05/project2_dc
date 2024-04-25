@@ -1,9 +1,12 @@
-{% block more_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">        
-{% endblock %}
+{% extends "base.html" %}
 
-<h1>Hi, {{ current_user.username }}! This is your dashboard:</h1>
+{% block content %}
+    {% block more_css %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">        
+    {% endblock %}
+
+    <h1>Hi, {{ current_user.username }}! This is your dashboard:</h1>
 
     <div class="button">
         {% set pic_link = "/pic" %}
@@ -14,7 +17,6 @@
     <h2>Your Class Year is: {{ current_user.year }}</h2>
     <h2>Your Major is: {{ current_user.major }} </h2>
     <h2>Your Email is: {{ current_user.email }}</h2>
-
 
     <div>
         <h3>Here are the comments on your profile:</h3><br>
@@ -38,5 +40,4 @@
         {% set edit_link = "/edit" %}
         <a href="{{ edit_link }}" class="btn btn-primary">Update profile</a>
     </div>
-
 {% endblock %}

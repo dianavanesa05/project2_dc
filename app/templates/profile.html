@@ -21,7 +21,7 @@
         <div class="button">
             {% set uid = user.id | string() %}
             {% set pic_link = "/otherPic/" ~ uid %}
-            <a href="{{ pic_link }}">Click here to see their profile pic</a>    
+            <a href="{{ pic_link }}" class="btn btn-primary">Click here to see their profile pic</a>    
         </div>
 
         <div>
@@ -43,7 +43,7 @@
                 {{ form.comments.label }}<br>
                 {{ form.comments(size=32) }}<br>
             </p>
-            <p> {{ form.submit() }} </p>
+            <p> {{ form.submit(class="btn btn-primary") }}</p>
         </form>
 
     </div>
