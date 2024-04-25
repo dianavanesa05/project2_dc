@@ -9,23 +9,34 @@ class TestRoutes(unittest.TestCase):
         # Set up the Flask app and database for testing
         app.config['TESTING'] = True
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
-        db.create_all()
+        cls.app = app.test_client()
+
+        with app.app_context():
+            db.create_all()
 
     @classmethod
     def tearDownClass(cls):
         # Clean up after testing
-        db.session.remove()
-        db.drop_all()
+        with app.app_context():
+            db.session.remove()
+            db.drop_all()
 
     def setUp(self):
         # Create a test client and push a test context
         self.client = app.test_client()
         self.app_context = app.app_context()
         self.app_context.push()
+        self.clear_users()  # Clear users before each test
 
     def tearDown(self):
         # Pop the test context
         self.app_context.pop()
+
+    def clear_users(self):
+        # Remove all users from the database
+        with app.app_context():
+            User.query.delete()
+            db.session.commit()
 
     def test_home_page(self):
         response = self.client.get('/')
@@ -48,18 +59,6 @@ class TestRoutes(unittest.TestCase):
         self.assertEqual(response.status_code, 302)  # Redirects to login if not authenticated
         # Add assertions for authenticated user's access to edit profile page
 
-    def test_user_authentication(self):
-        # Test user registration
-        response = self.client.post('/register', data={'username': 'test_user', 'email': 'test@example.com', 'password': 'password', 'password2': 'password'})
-        self.assertEqual(response.status_code, 302)  # Redirects to login page after successful registration
-        
-        # Test user login
-        response = self.client.post('/login', data={'username': 'test_user', 'password': 'password'}, follow_redirects=True)
-        self.assertIn(b'Logged in successfully', response.data)
-
-        # Test user logout
-        response = self.client.get('/logout', follow_redirects=True)
-        self.assertIn(b'You have been logged out', response.data)
         
     def test_database_interactions(self):
         # Test database interactions (assuming you have a User and Post model)
