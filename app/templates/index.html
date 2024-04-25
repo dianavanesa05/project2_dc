@@ -1,17 +1,13 @@
-{% extends "base.html" %}
+{% block more_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">        
+{% endblock %}
 
-{% block content %}
-
-    {% block more_css %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">        
-    {% endblock %}
-
-    <h1>Hi, {{ current_user.username }}! This is your dashboard:</h1>
+<h1>Hi, {{ current_user.username }}! This is your dashboard:</h1>
 
     <div class="button">
         {% set pic_link = "/pic" %}
-        <a href="{{ pic_link }}">Click here to see your profile pic</a>    
+        <a href="{{ pic_link }}" class="btn btn-primary">Click here to see your profile pic</a>    
     </div>
 
     <h2>Your Name is: {{ current_user.fName }} {{current_user.lName}}</h2>
@@ -25,7 +21,7 @@
         {% for comment in current_user.comments %}
             {% set cid = comment.id | string() %}
             {% set link = "/delete/" ~ cid %}
-            <p> {{ comment.username }}: {{ comment.comments }}</p> <p> <a href="{{ link }}">delete comment</a></p><br>
+            <p> {{ comment.username }}: {{ comment.comments }}</p> <p> <a href="{{ link }}" class="btn btn-danger">delete comment</a></p><br>
         {% endfor %}
     </div>
 
@@ -35,7 +31,7 @@
             {{ form.comments.label }}<br>
             {{ form.comments(size=32) }}<br>
         </p>
-        <p> {{ form.submit() }} </p>
+        <p> {{ form.submit(class="btn btn-primary") }} </p>
     </form>
 
     <div class="button">

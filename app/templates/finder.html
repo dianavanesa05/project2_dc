@@ -1,28 +1,24 @@
-<html>
-    <head>
-        {% block more_css %}
-            <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
-        {% endblock %}
-    </head>
+{% block more_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">        
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
+{% endblock %}
 
-    <body>
+<nav class="menu">
+    <ul>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        <li><a href="{{ url_for('index') }}">Profile</a></li>
+    </ul>
+</nav>
 
-        <nav class="menu">
-            <ul>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                <li><a href="{{ url_for('index') }}">Profile</a></li>
-            </ul>
-        </nav>
-
-        <h1>Find Other Users Here:</h1>
+<div class="container">
+    <h1>Find Other Users Here:</h1>
 
         <h2>Users by your Major and Class Year: {{ current_user.major}} Majors in Class Year {{ current_user.year }}</h2>
         {% if has_major_class %}
             {% for user in usersMajorAndClass %}
                 {% set uid = user.id | string() %}
                 {% set link = "/users/" ~ uid %}
-                    <p> <a href="{{ link }}">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
+                    <p> <a href="{{ link }}" class="btn btn-primary">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
             {% endfor %}
         {% else %}
             <p>There are no users that fit this category</p>
@@ -33,7 +29,7 @@
                 {% for user in userClass %}
                     {% set uid = user.id | string() %}
                     {% set link = "/users/" ~ uid %}
-                        <p> <a href="{{ link }}">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
+                        <p> <a href="{{ link }}" class="btn btn-primary">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
                 {% endfor %}
             {% else %}
                 <p>There are no users that fit this category</p>
@@ -44,7 +40,7 @@
                 {% for user in userMajor %}
                         {% set uid = user.id | string() %}
                         {% set link = "/users/" ~ uid %}
-                            <p> <a href="{{ link }}">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
+                            <p> <a href="{{ link }}" class="btn btn-primary">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
                 {% endfor %}
             {% else %}
                 <p>There are no users that fit this category</p>
@@ -55,11 +51,10 @@
                 {% for user in users %}
                     {% set uid = user.id | string() %}
                     {% set link = "/users/" ~ uid %}
-                        <p> <a href="{{ link }}">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
+                        <p> <a href="{{ link }}" class="btn btn-primary">{{ user.username }}: {{ user.fName }} {{ user.lName }}</a></p><br>
                 {% endfor %}
             {% else %}
                 <p>There are no users that fit this category</p>
             {% endif %}
 
-    </body>
-</html>
+    </div>

@@ -1,26 +1,22 @@
-<html>
-    <head>
-        {% block more_css %}
-            <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">  
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">      
-        {% endblock %}
-    </head>
+{% block more_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">      
+{% endblock %}
 
-    <body>
+<nav class="menu">
+    <ul>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        <li><a href="{{ url_for('index') }}">Profile</a></li>
+        <li><a href="{{ url_for('finder') }}">Finder</a></li>
+    </ul>
+</nav>
 
-        <nav class="menu">
-            <ul>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                <li><a href="{{ url_for('index') }}">Profile</a></li>
-                <li><a href="{{ url_for('finder') }}">Finder</a></li>
-            </ul>
-        </nav>
-
-        <h1>Welcome to {{ user.username }}'s profile</h1>
-        <h2>Their name is {{ user.fName }} {{ user.lName }}</h2>
-        <h2>Their class year is {{ user.year }} </h2>
-        <h2>Their major is {{ user.major }}</h2>
-        <h2>Their email is {{ user.email }}</h2>
+<div class="container">
+    <h1>Welcome to {{ user.username }}'s profile</h1>
+    <h2>Their name is {{ user.fName }} {{ user.lName }}</h2>
+    <h2>Their class year is {{ user.year }} </h2>
+    <h2>Their major is {{ user.major }}</h2>
+    <h2>Their email is {{ user.email }}</h2>
 
         <div class="button">
             {% set uid = user.id | string() %}
@@ -50,5 +46,4 @@
             <p> {{ form.submit() }} </p>
         </form>
 
-    </body>
-</html>
+    </div>
