@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">        
     {% endblock %}
 
-    <h1>Hi, {{ current_user.username }}! This is your dashboard</h1>
+    <h1>Hi, {{ current_user.username }}! This is your dashboard:</h1>
 
     <div class="button">
         {% set pic_link = "/pic" %}
@@ -40,7 +40,7 @@
 
     <div class="button">
         {% set edit_link = "/edit" %}
-        <a href="{{ edit_link }}">Update profile</a>
+        <a href="{{ edit_link }}" class="btn btn-primary">Update profile</a>
     </div>
 
 {% endblock %}

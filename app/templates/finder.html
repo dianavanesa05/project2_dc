@@ -15,9 +15,9 @@
             </ul>
         </nav>
 
-        <h1>Find other users here</h1>
+        <h1>Find Other Users Here:</h1>
 
-        <h2>Find Users by your Major and Class Year: {{ current_user.major}} majors in class year {{ current_user.year }}</h2>
+        <h2>Users by your Major and Class Year: {{ current_user.major}} Majors in Class Year {{ current_user.year }}</h2>
         {% if has_major_class %}
             {% for user in usersMajorAndClass %}
                 {% set uid = user.id | string() %}
@@ -28,7 +28,7 @@
             <p>There are no users that fit this category</p>
         {% endif %}
         
-        <h2>Find Users by your Class Year: {{ current_user.year }}</h2>
+        <h2>Users by your Class Year: {{ current_user.year }}</h2>
             {% if has_class %}
                 {% for user in userClass %}
                     {% set uid = user.id | string() %}
@@ -39,7 +39,7 @@
                 <p>There are no users that fit this category</p>
             {% endif %}
 
-        <h2>Find Users by your Major: {{ current_user.major }}</h2>
+        <h2>Users by your Major: {{ current_user.major }}</h2>
             {% if has_major %}
                 {% for user in userMajor %}
                         {% set uid = user.id | string() %}
@@ -50,7 +50,7 @@
                 <p>There are no users that fit this category</p>
             {% endif %}
 
-        <h2>All users</h2>
+        <h2>All users:</h2>
             {% if has_users %}
                 {% for user in users %}
                     {% set uid = user.id | string() %}
